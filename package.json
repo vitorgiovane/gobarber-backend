@@ -1,0 +1,22 @@
+{
+  "name": "gobarber-backend",
+  "version": "1.0.0",
+  "description": "Fase 2 do Bootcamp da Rocketseat: Iniciando back-end do GoBarber",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitorgiovane/gobarber-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vitorgiovane/gobarber-backend/issues"
+  },
+  "homepage": "https://github.com/vitorgiovane/gobarber-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
