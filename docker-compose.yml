@@ -1,33 +1,33 @@
-version: "3"
+version: '3'
 
 services:
   postgres:
     build:
       context: ./docker/postgres
-    container_name: "${DOCKER_CONTAINER_PREFIX}-postgres"
-    restart: "always"
+    container_name: '${DOCKER_CONTAINER_PREFIX}-postgres'
+    restart: 'always'
     volumes:
       - ./docker/postgres/data:/var/lib/postgresql/data
     ports:
-      - "${DB_PORT}:5432"
+      - '${DB_EXTERNAL_PORT}:${DB_PORT}'
     environment:
       - POSTGRES_DB=${DB_DATABASE}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
   node:
-    container_name: "${DOCKER_CONTAINER_PREFIX}-node"
+    container_name: '${DOCKER_CONTAINER_PREFIX}-node'
     build:
       context: ./
       dockerfile: ./docker/node/Dockerfile
     command: nodemon server.js
     ports:
-      - "${PORT}:3333"
+      - '${NODE_PORT}:3333'
     environment:
       - NODE_ENV=${NODE_ENV}
       - POSTGRES_DB=${DB_DATABASE}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-    restart: "always"
+    restart: 'always'
     volumes:
       - .:/home/linex/backend
     links:
@@ -36,9 +36,9 @@ services:
   adminer:
     build:
       context: ./docker/adminer
-    container_name: "linex-adminer"
-    restart: "always"
+    container_name: 'linex-adminer'
+    restart: 'always'
     ports:
-      - "8080:8080"
+      - '${ADMINER_PORT}:8080'
     links:
       - postgres
