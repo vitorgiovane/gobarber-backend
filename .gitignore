@@ -63,3 +63,5 @@ typings/
 # VS Code
 .history
 .vscode
+
+/docker/postgres/data
