@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 import User from '../models/User'
-import authConfig from '../../config/auth'
-const { secret, expiresIn } = authConfig
+import { secret, expiresIn } from '../../config/auth'
 
 class SessionController {
   async store(request, response) {
