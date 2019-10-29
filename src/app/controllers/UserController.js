@@ -15,7 +15,24 @@ class UserController {
   }
 
   async update(request, response){
-    return response.json({ ok: true })
+    const { email, oldPassword } = request.body
+    const user = await User.findByPk(request.userId)
+
+    if(email !== user.email){
+      const emailExists = await User.findOne({
+        where: { email: request.body.email }
+      })
+      if (emailExists) {
+        return response.status(400).json({ error: 'E-mail already exists.' })
+      }
+    }
+
+    if(oldPassword && !await user.checkPassword(oldPassword)){
+      return response.status(401).json({error: "The old password doesn't match."})
+    }
+
+    const { id, name, provider } = await user.update(request.body)
+    return response.json({ id, name, email, provider })
   }
 }
 
